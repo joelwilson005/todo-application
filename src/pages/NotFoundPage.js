@@ -9,7 +9,7 @@ import useLoadingState from "../hooks/useLoadingState";
 import { Helmet } from "react-helmet";
 import titles from "./pageTitles";
 import { Link } from "react-router-dom";
-const HomePage = () => {
+const NotFoundPage = () => {
   const loading = useLoadingState();
 
 
@@ -20,7 +20,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>{titles.home}</title>
+        <title>{titles.notFound}</title>
       </Helmet>
       <div className="grid min-h-screen grid-cols-1">
         <nav className="grid grid-cols-2 pt-10 pl-10 pr-10 place-content-between bg-neutralBackground">
@@ -56,4 +56,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default NotFoundPage;

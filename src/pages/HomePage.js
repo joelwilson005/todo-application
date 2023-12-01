@@ -48,7 +48,7 @@ const HomePage = () => {
             </ul>
           </div>
         </nav>
-        <main className="grid grid-cols-1 px-10 gap bg-neutralBackground lg:grid-cols-2">
+        <main className="grid grid-cols-1 px-10 bg-neutralBackground lg:grid-cols-2">
           <motion.p
             initial={homePageAnimations.initial}
             animate={homePageAnimations.animateFromLeft}
