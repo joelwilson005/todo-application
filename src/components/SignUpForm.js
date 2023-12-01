@@ -32,14 +32,16 @@ const SignUpForm = () => {
   const [icon, setIcon] = useState(eyeOff);
   const dispatch = useDispatch();
 
-  // Send form data to REST endpoint
+  // Function to send form data to REST endpoint
   const sendFormData = async (payload) => {
+    // Extract username and email from payload for availability check
     const usernameAndEmail = {
       username: payload.username,
       emailAddress: payload.emailAddress,
     };
 
     try {
+      // Check if username or email address is already taken
       const response = await checkUsernameAndEmailAvailability(
         usernameAndEmail
       );
@@ -61,20 +63,25 @@ const SignUpForm = () => {
       CreateToastNotification("error", "An error has occurred");
     }
 
+    // Dispatch action to sign up user
     dispatch(fetchSignUpUser(payload))
       .unwrap()
       .then(() => {
-        navigate("/dashboard")
-      }).catch((error) => {
-
-
-        if(error.code) {
-
+        navigate("/dashboard");
+        CreateToastNotification(
+          "success",
+          "Account successfully created",
+          5000
+        );
+      })
+      .catch((error) => {
+        if (error.code) {
           CreateToastNotification("error", "An unexpected error has occurred");
         }
       });
   };
 
+  // Function to toggle password visibility
   const handleToggle = () => {
     if (type === "password") {
       setIcon(eye);
@@ -85,6 +92,7 @@ const SignUpForm = () => {
     }
   };
 
+  // Formik hook for form handling
   const {
     values,
     errors,
@@ -107,7 +115,8 @@ const SignUpForm = () => {
     <>
       <div className="flex flex-col p-10 bg-neutralBackground 2xl:place-self-center sm:py-20">
         <h2 className="text-center text-neutralText">Sign up</h2>{" "}
-        <form className="flex flex-col p-10" onSubmit={onsubmit}>
+        <form className="flex flex-col p-10" onSubmit={handleSubmit}>
+          {/* First name input field */}
           <motion.input
             whileFocus={{
               scale: 1.02,
@@ -128,6 +137,7 @@ const SignUpForm = () => {
 
           {errors.firstName && <p className="error-text">{errors.firstName}</p>}
 
+          {/* Last name input field */}
           <motion.input
             whileFocus={{
               scale: 1.02,
@@ -148,6 +158,7 @@ const SignUpForm = () => {
 
           {errors.lastName && <p className="error-text">{errors.lastName}</p>}
 
+          {/* Username input field */}
           <motion.input
             whileFocus={{
               scale: 1.02,
@@ -168,6 +179,7 @@ const SignUpForm = () => {
 
           {errors.username && <p className="error-text">{errors.username}</p>}
 
+          {/* Email address input field */}
           <motion.input
             whileFocus={{
               scale: 1.02,
@@ -190,6 +202,7 @@ const SignUpForm = () => {
             <p className="error-text">{errors.emailAddress}</p>
           )}
 
+          {/* Password input field */}
           <div className="flex mb-4">
             <motion.input
               whileFocus={{
@@ -208,6 +221,7 @@ const SignUpForm = () => {
                   : "form-input min-w-full"
               }
             />
+            {/* Password visibility toggle */}
             <span
               className="flex items-center justify-around"
               onClick={handleToggle}
@@ -218,6 +232,7 @@ const SignUpForm = () => {
 
           {errors.password && <p className="error-text">{errors.password}</p>}
 
+          {/* Confirm password input field */}
           <div className="flex mb-4">
             <motion.input
               whileFocus={{
@@ -236,6 +251,7 @@ const SignUpForm = () => {
                   : "form-input min-w-full"
               }
             />
+            {/* Password visibility toggle for confirm password */}
             <span
               className="flex items-center justify-around"
               onClick={handleToggle}
@@ -248,6 +264,7 @@ const SignUpForm = () => {
             <p className="error-text">{errors.confirmPassword}</p>
           )}
 
+          {/* Gender selection dropdown */}
           <select
             name="gender"
             value={values.gender}
@@ -269,10 +286,10 @@ const SignUpForm = () => {
             <p className="error-text">{errors.gender}</p>
           )}
 
-          <label for="dateOfBirth" className="mt-4 text-neutralText">
+          {/* Date of birth input field */}
+          <label htmlFor="dateOfBirth" className="mt-4 text-neutralText">
             Date of birth
           </label>
-
           <input
             type="date"
             id="dateOfBirth"
@@ -290,6 +307,7 @@ const SignUpForm = () => {
             <p className="error-text">{errors.dateOfBirth}</p>
           )}
 
+          {/* Submit button */}
           {(!isSubmitting && (
             <motion.button
               whileHover={{
@@ -298,13 +316,13 @@ const SignUpForm = () => {
               }}
               className="hover:drop-shadow-md"
               type="submit"
-              onClick={handleSubmit}
               disabled={isSubmitting}
             >
               Submit
             </motion.button>
           )) || <DisabledLoadingButton />}
         </form>
+        {/* Link to Sign In page */}
         <p className="px-10 text-main">
           Already have an account?{" "}
           <motion.span
