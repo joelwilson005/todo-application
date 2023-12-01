@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from "./pages/HomePage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import Dashboard from "./pages/Dashboard";
+import PasswordResetPage from "./pages/PasswordResetPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./util/scrollToTop";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Toaster />
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" Component={HomePage} />
+          <Route path="/signin" Component={SignInPage} />
+          <Route path="/signup" Component={SignUpPage} />
+          <Route path="/reset" Component={PasswordResetPage} />
+          <Route path="/dashboard" Component={Dashboard} />
+
+          <Route path="*" Component={NotFoundPage} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
