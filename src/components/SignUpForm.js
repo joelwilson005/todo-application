@@ -12,6 +12,7 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Form initial values
 const initialValues = {
@@ -26,6 +27,7 @@ const initialValues = {
 };
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const dispatch = useDispatch();
@@ -56,27 +58,21 @@ const SignUpForm = () => {
         return;
       }
     } catch (error) {
-      CreateToastNotification("error", "An error has occured");
+      CreateToastNotification("error", "An error has occurred");
     }
 
-    try {
-      const action = await dispatch(fetchSignUpUser(payload));
+    dispatch(fetchSignUpUser(payload))
+      .unwrap()
+      .then(() => {
+        navigate("/dashboard")
+      }).catch((error) => {
 
-      // Check if the action type is 'rejected' and if there is an error property
-      if (fetchSignUpUser.rejected.match(action) && action.error) {
-        const errorCode = action.error.code;
 
-        if (errorCode === "ERR_BAD_REQUEST") {
-          CreateToastNotification("error", "Invalid username or password");
-        } else {
-          CreateToastNotification("error", "An error occurred");
+        if(error.code) {
+
+          CreateToastNotification("error", "An unexpected error has occurred");
         }
-      }
-    } catch (error) {
-      // Handle unexpected errors, e.g., network issues
-      console.error("Unexpected error:", error);
-      CreateToastNotification("error", "An unexpected error occurred");
-    }
+      });
   };
 
   const handleToggle = () => {

@@ -11,6 +11,7 @@ import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Form initial values
 const initialValues = {
@@ -20,29 +21,32 @@ const initialValues = {
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+
+  // React Router's navigation hook
+  const navigate = useNavigate();
+
+  // State to manage password visibility
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
 
-  // Send form data to REST endpoint
-  const sendFormData = async (payload) => {
-    try {
-      const action = await dispatch(fetchSignInUser(payload));
-
-      // Check if the action type is 'rejected' and if there is an error property
-      if (fetchSignInUser.rejected.match(action) && action.error) {
-        const errorCode = action.error.code;
-
-        if (errorCode === "ERR_BAD_REQUEST") {
+  // Function to send form data to REST endpoint
+  const sendFormData = (payload) => {
+    dispatch(fetchSignInUser(payload))
+      .unwrap()
+      .then(() => {
+        navigate("/dashboard"); // Navigate to the dashboard on successful login
+      })
+      .catch((error) => {
+        // Handle different error scenarios
+        if (error.code === "ERR_BAD_REQUEST") {
           CreateToastNotification("error", "Invalid username or password");
-        } else {
-          CreateToastNotification("error", "An error occurred");
+        } else if (error.code) {
+          CreateToastNotification("error", "An unexpected error has occurred");
         }
-      }
-    } catch (error) {
-      CreateToastNotification("error", "An unexpected error occurred");
-    }
+      });
   };
 
+  // Function to toggle password visibility
   const handleToggle = () => {
     if (type === "password") {
       setIcon(eye);
@@ -53,6 +57,7 @@ const SignInForm = () => {
     }
   };
 
+  // Formik hook for form handling
   const {
     values,
     errors,
@@ -64,17 +69,17 @@ const SignInForm = () => {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: signInFormSchema,
-
     onSubmit: async (values, actions) => {
-      await sendFormData(values);
+      await sendFormData(values); // Call the function to send form data on form submission
     },
   });
 
   return (
     <>
       <div className="flex flex-col p-10 bg-neutralBackground 2xl:place-self-center sm:py-20">
-        <h2 className="text-center text-neutralText">Sign in</h2>{" "}
-        <form className="flex flex-col p-10" onSubmit={onsubmit}>
+        <h2 className="text-center text-neutralText">Sign in</h2>
+        <form className="flex flex-col p-10" onSubmit={handleSubmit}>
+          {/* Username input field */}
           <motion.input
             whileFocus={{
               scale: 1.02,
@@ -93,6 +98,7 @@ const SignInForm = () => {
             <p className="error-text">Please enter a valid username</p>
           )}
 
+          {/* Password input field */}
           <div className="flex mb-4">
             <motion.input
               whileFocus={{
@@ -111,6 +117,7 @@ const SignInForm = () => {
                   : "form-input min-w-full"
               }
             />
+            {/* Password visibility toggle */}
             <span
               className="flex items-center justify-around"
               onClick={handleToggle}
@@ -118,10 +125,11 @@ const SignInForm = () => {
               <Icon className="absolute mr-10" icon={icon} size={25} />
             </span>
           </div>
-          {errors.username && (
+          {errors.password && (
             <p className="error-text">Please enter a valid password</p>
           )}
 
+          {/* Submit button */}
           {(!isSubmitting && (
             <motion.button
               whileHover={{
@@ -130,13 +138,14 @@ const SignInForm = () => {
               }}
               className="hover:drop-shadow-md"
               type="submit"
-              onClick={handleSubmit}
               disabled={isSubmitting}
             >
               Submit
             </motion.button>
           )) || <DisabledLoadingButton />}
         </form>
+
+        {/* Sign-up link */}
         <p className="px-10 text-main">
           Don't have an account?{" "}
           <motion.span
@@ -150,6 +159,8 @@ const SignInForm = () => {
             </Link>
           </motion.span>
         </p>
+
+        {/* Forgot password link */}
         <p className="px-10 mt-8 text-main">
           Forgot your password?{" "}
           <motion.span
