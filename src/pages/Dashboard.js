@@ -1,11 +1,26 @@
-import React from 'react'
+import useLoadingState from "../hooks/useLoadingState";
+import LoadingBars from "../animation/LoadingBars";
+import TodoListContainer from "../components/TodoListContainer";
+import Foote
 
 const Dashboard = () => {
+
+
+  const loading = useLoadingState();
+
+  
+
+  
+
+  if (loading) {
+    return <LoadingBars></LoadingBars>;
+  }
+
   return (
     <>
-    <h1>To be implemented.</h1>
+      <TodoListContainer/>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

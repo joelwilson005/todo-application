@@ -41,7 +41,7 @@ const ResetPasswordForm = () => {
 
           if (errorStatus === 404) {
             CreateToastNotification("error", "User does not exist");
-          } else if (errorStatus) {
+          } else {
             CreateToastNotification("error", "An error has occurred");
           }
         },
