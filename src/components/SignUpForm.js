@@ -67,7 +67,7 @@ const SignUpForm = () => {
     dispatch(fetchSignUpUser(payload))
       .unwrap()
       .then(() => {
-        navigate("/dashboard");
+        navigate(0);
         CreateToastNotification(
           "success",
           "Account successfully created",
@@ -333,6 +333,19 @@ const SignUpForm = () => {
           >
             <Link to="/signin" className="hover:underline">
               Sign in
+            </Link>
+          </motion.span>
+        </p>
+        <p className="px-10 text-main mt-10 text-sm">
+          By creating an account, you agree to our{" "}
+          <motion.span
+            whileHover={{
+              scale: 1.05,
+            }}
+            className="block mt-4 max-w-fit text-accent "
+          >
+            <Link to="/terms" className="hover:underline text-sm">
+              Terms & Conditions
             </Link>
           </motion.span>
         </p>

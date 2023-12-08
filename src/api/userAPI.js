@@ -2,12 +2,16 @@ import axios from "axios";
 
 import { USER_URL, ROOT_URL_DEV } from "../constants/url";
 
+const jwt = localStorage.getItem("jwt");
+const userId = localStorage.getItem("userId");
+
 const contentTypeHeader = {
   "Content-Type": "application/json",
 };
 
-const tokenHeader = {
-  Authorization: "Bearer ",
+const headerWithToken = {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${jwt}`,
 };
 
 export const signInUser = async (payload) => {
@@ -16,6 +20,18 @@ export const signInUser = async (payload) => {
 
 export const signUpUser = async (payload) => {
   return await axios.post(`${USER_URL}/register`, payload, contentTypeHeader);
+};
+
+export const getUser = async () => {
+  console.log(headerWithToken);
+  return await axios.get(`${USER_URL}/${userId}`, { headers: headerWithToken });
+};
+
+export const updateUser = async (payload) => {
+  console.log("PAYLOAD: " + JSON.stringify(payload));
+  return await axios.put(`${USER_URL}/${userId}`, payload, {
+    headers: headerWithToken,
+  });
 };
 
 export const checkUsernameAndEmailAvailability = async (payload) => {
@@ -39,4 +55,13 @@ export const updatePasswordWithToken = async (payload) => {
     payload,
     contentTypeHeader
   );
+};
+
+
+export const deleteAccount = async () => {  
+
+
+  return await axios.delete(`${USER_URL}/${userId}`, {
+    headers: headerWithToken,
+  }); 
 };

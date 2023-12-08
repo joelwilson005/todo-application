@@ -12,20 +12,19 @@ import useCheckUserStatus from "../hooks/useCheckUserStatus";
 
 // Functional component for the SignUpPage
 const SignUpPage = () => {
-  // React Router hook for programmatic navigation
-  const navigate = useNavigate();
-
   // Custom hook to check if the user is already signed in
-  const isSignedIn = useCheckUserStatus();
+  const isUserSignedIn = useCheckUserStatus();
+
+  const navigate = useNavigate();
 
   // Custom hook to manage loading state
   const loading = useLoadingState();
 
-  // Redirect to the dashboard if the user is already signed in
-  if (isSignedIn) {
+  if (isUserSignedIn) {
     navigate("/dashboard");
   }
 
+  // Redirect to the dashboard if the user is already signed in
   // Display loading animation while checking user status
   if (loading) {
     return <LoadingBars></LoadingBars>;

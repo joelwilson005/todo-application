@@ -3,6 +3,9 @@ import {
   signInUser,
   signUpUser,
   updatePasswordWithToken,
+  updateUser,
+  getUser,
+  deleteAccount,
 } from "../api/userAPI";
 
 const initialState = {
@@ -18,6 +21,27 @@ const initialState = {
 };
 
 // Async thunks
+
+export const fetchGetUser = createAsyncThunk(
+  "user/fetchGetUser",
+  async (payload) => {
+    const response = await getUser(payload);
+
+    console.log("RESPONSE: " + JSON.stringify(response.data));
+
+    return response.data;
+  }
+);
+
+export const fetchUpdateUser = createAsyncThunk(
+  "user/fetchUpdateUser",
+  async (payload) => {
+    console.log("THUNK PAYLOAD" + payload);
+    const response = await updateUser(payload);
+
+    return response.data;
+  }
+);
 
 export const fetchSignInUser = createAsyncThunk(
   "user/fetchSignInUser",
@@ -47,6 +71,16 @@ export const fetchResetUserPassword = createAsyncThunk(
   }
 );
 
+export const fetchDeleteAccount = createAsyncThunk(
+  "user/fetchDeleteAccount",
+
+  async (payload) => {
+    const response = await deleteAccount(payload);
+
+    return response.data;
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -68,7 +102,30 @@ const userSlice = createSlice({
       })
       .addCase(fetchSignInUser.rejected, (state, action) => {
         state.error = action.error.message;
+        state.status = "failed";
       })
+
+      .addCase(fetchGetUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.userObject = action.payload;
+      })
+
+      .addCase(fetchGetUser.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.status = "failed";
+      })
+
+      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+
+        state.userObject = action.payload;
+      })
+
+      .addCase(fetchUpdateUser.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.status = "failed";
+      })
+
       .addCase(fetchSignUpUser.fulfilled, (state, action) => {
         state.status = "succeeded";
 
@@ -83,6 +140,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchSignUpUser.rejected, (state, action) => {
         state.error = action.error.message;
+        state.status = "failed";
       })
       .addCase(fetchResetUserPassword.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -98,11 +156,17 @@ const userSlice = createSlice({
       })
       .addCase(fetchResetUserPassword.rejected, (state, action) => {
         state.error = action.error.message;
+        state.status = "failed";
+      })
+      .addCase(fetchDeleteAccount.fulfilled, (state, action) => {
+        state.status = "succeeded";
+
+        state = null;
       });
   },
 });
 
-export const getUser = (state) => state.userObject;
+export const getUserFromStore = (state) => state.user.userObject;
 
 export const getError = (state) => state.error;
 

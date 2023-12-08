@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import LoadingBars from "../animation/LoadingBars";
 import { motion } from "framer-motion";
-import backgroundImage from "../img/undraw_taken_re_yn20 (1).svg"
+import backgroundImage from "../img/undraw_taken_re_yn20 (1).svg";
 import logo from "../img/vectorpaint.svg";
 import { homePageAnimations } from "../animation/homePageAnimations";
 import useLoadingState from "../hooks/useLoadingState";
@@ -11,7 +11,6 @@ import titles from "./pageTitles";
 import { Link } from "react-router-dom";
 const NotFoundPage = () => {
   const loading = useLoadingState();
-
 
   if (loading) {
     return <LoadingBars></LoadingBars>;
@@ -27,7 +26,6 @@ const NotFoundPage = () => {
           <div className="col-span-1">
             <img className="w-[160px] h-[80px]" src={logo} alt="logo" />
           </div>
-
         </nav>
         <main className="grid grid-cols-1 gap-1 px-10 sm:pt-8 bg-neutralBackground lg:grid-cols-2">
           <motion.p
@@ -38,7 +36,12 @@ const NotFoundPage = () => {
           >
             You seem to be lost 😔
             <br />
-            <Link className="block py-10 text-2xl text-accent hover:underline" to="/">Return home</Link>
+            <Link
+              className="block py-10 text-2xl text-accent hover:underline"
+              to="/"
+            >
+              Return home
+            </Link>
           </motion.p>
           <motion.div
             initial={homePageAnimations.initial}

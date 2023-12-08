@@ -12,14 +12,17 @@ import useCheckUserStatus from "../hooks/useCheckUserStatus";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const loading = useLoadingState();
+
+  const navigate = useNavigate();
 
   const isUserSignedIn = useCheckUserStatus();
 
-  if (isUserSignedIn) {
-    navigate("/dashboard");
+  if(isUserSignedIn) {
+
+    navigate("/dashboard")
   }
+
 
   if (loading) {
     return <LoadingBars></LoadingBars>;

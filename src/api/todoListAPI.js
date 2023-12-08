@@ -23,3 +23,15 @@ export const getTodoListById = async (todoListId) => {
 export const addNewTodoList = async (payload) => {
   return await axios.post(`${USER_URL}/${userId}/todos`, payload, { headers });
 };
+
+export const updateExistingTodoList = async (payload) => {
+  return await axios.put(`${USER_URL}/${userId}/todos/${payload.id}`, payload, {
+    headers,
+  });
+};
+
+export const deleteTodoList = async (payload) => {
+  return await axios.delete(`${USER_URL}/${userId}/todos/${payload.id}`, {
+    headers,
+  });
+};

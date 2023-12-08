@@ -20,5 +20,5 @@ module.exports = {
       information: "#3399ff",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

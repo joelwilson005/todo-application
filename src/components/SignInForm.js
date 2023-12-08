@@ -34,13 +34,13 @@ const SignInForm = () => {
     dispatch(fetchSignInUser(payload))
       .unwrap()
       .then(() => {
-        navigate("/dashboard"); // Navigate to the dashboard on successful login
+        navigate(0); // Navigate to the dashboard on successful login
       })
       .catch((error) => {
         // Handle different error scenarios
         if (error.code === "ERR_BAD_REQUEST") {
           CreateToastNotification("error", "Invalid username or password");
-        } else if (error.code) {
+        } else if (error) {
           CreateToastNotification("error", "An unexpected error has occurred");
         }
       });
