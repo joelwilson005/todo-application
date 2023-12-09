@@ -31,19 +31,19 @@ const DashboardNavBar = () => {
         };
     }, []);
 
-    const handleClick = (event) => {
+    const handleClick = () => {
         setOpen(true);
     };
 
-    const handleOpenUserSettings = (event) => {
+    const handleOpenUserSettings = () => {
         setOpenUserSettings(true);
     };
 
-    const handleUserClick = (event) => {
+    const handleUserClick = () => {
         setDropdownOpen(!dropdownOpen);
     };
 
-    const handleSignOutUser = (event) => {
+    const handleSignOutUser = () => {
         localStorage.setItem("isUserSignedIn", "false");
         navigate("/");
         localStorage.clear();
@@ -82,23 +82,22 @@ const DashboardNavBar = () => {
                                     aria-orientation="vertical"
                                     aria-labelledby="options-menu"
                                 >
-                                    <a
-                                        href="#"
+                                    <button
+
                                         onClick={handleOpenUserSettings}
                                         className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
                                         role="menuitem"
                                     >
                                         Account Settings
-                                    </a>
+                                    </button>
                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                    <a
-                                        href="#"
+                                    <button
                                         className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
                                         role="menuitem"
                                         onClick={handleSignOutUser}
                                     >
                                         Sign out
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         )}
