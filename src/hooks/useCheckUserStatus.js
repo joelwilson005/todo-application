@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 
 const useCheckUserStatus = () => {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+    const [isUserSignedIn, setIsUserSignedIn] = useState(false);
 
-  useEffect(() => {
-    setIsUserSignedIn(Boolean(localStorage.getItem("isUserSignedIn")));
-  }, [isUserSignedIn]);
+    useEffect(() => {
+        setIsUserSignedIn(Boolean(localStorage.getItem("isUserSignedIn")));
+    }, [isUserSignedIn]);
 
-  return isUserSignedIn;
+    return isUserSignedIn;
 };
 
 export default useCheckUserStatus;

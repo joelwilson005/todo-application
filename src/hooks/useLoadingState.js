@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 
 const useLoadingState = () => {
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setLoading((loading) => !loading);
-    }, 500);
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setLoading((loading) => !loading);
+        }, 500);
 
-    return () => clearTimeout(timeoutId); // Cleanup the timeout on component unmount
-  }, []);
+        return () => clearTimeout(timeoutId); // Cleanup the timeout on component unmount
+    }, []);
 
-  return loading;
+    return loading;
 };
 
 export default useLoadingState;

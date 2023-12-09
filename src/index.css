@@ -1,45 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap");
-
 @layer components {
-  h1 {
-    @apply text-4xl font-semibold leading-4 tracking-tighter font-secondary;
-  }
+    h1 {
+        @apply text-4xl font-semibold leading-4 tracking-tighter font-secondary;
+    }
 
-  h2 {
-    @apply text-2xl font-semibold tracking-tighter font-secondary;
-  }
+    h2 {
+        @apply text-2xl font-semibold tracking-tighter font-secondary;
+    }
 
-  p,
-  a,
-  button {
-    @apply text-lg font-medium font-primary;
-  }
+    p,
+    a,
+    button {
+        @apply text-lg font-medium font-primary;
+    }
 
-  button[type="submit"],
-  button[type="submit"]:disabled {
-    @apply block px-8 py-3 mx-auto mt-8 font-bold border-2 rounded-full text-neutralBackground hover:text-opacity-90 bg-accent border-accent;
-  }
+    button[type="submit"],
+    button[type="submit"]:disabled {
+        @apply block px-8 py-3 mx-auto mt-8 font-bold border-2 rounded-full text-neutralBackground hover:text-opacity-90 bg-accent border-accent;
+    }
 
-  .form-input {
-    @apply p-3 my-3 border-2 rounded-md border-main focus:border-2 focus:outline-none focus:border-accent placeholder:font-primary placeholder-secondary;
-  }
+    .form-input {
+        @apply p-3 my-3 border-2 rounded-md border-main focus:border-2 focus:outline-none focus:border-accent placeholder:font-primary placeholder-secondary;
+    }
 
-  .error {
-    @apply border-error;
-  }
-  .error-text {
-    @apply text-sm text-error;
-  }
+    .error {
+        @apply border-error;
+    }
+
+    .error-text {
+        @apply text-sm text-error;
+    }
 }
 
 @font-face {
-  font-family: "primary";
+    font-family: "primary";
 }
 
 @font-face {
-  font-family: "secondary";
+    font-family: "secondary";
 }
