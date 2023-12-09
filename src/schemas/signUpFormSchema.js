@@ -5,7 +5,7 @@ const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const nameRules = /^[A-Za-z'-]{1,50}(?:\s[A-Za-z'-]{1,50})?$/;
 
-const userNameRules = /^[a-z0-9_-]{3,16}$/;
+const userNameRules = /^[a-zA-Z][a-zA-Z0-9_]{7,24}$/;
 
 const SignUpFormSchema = yup.object().shape({
     emailAddress: yup

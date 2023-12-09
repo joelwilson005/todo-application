@@ -34,7 +34,7 @@ const SignUpForm = () => {
     const sendFormData = async (payload) => {
         // Extract username and email from payload for availability check
         const usernameAndEmail = {
-            username: payload.username,
+            username: payload.username.toLowerCase(),
             emailAddress: payload.emailAddress,
         };
 
@@ -163,7 +163,7 @@ const SignUpForm = () => {
                         }}
                         type="text"
                         placeholder="Username"
-                        value={values.username}
+                        value={values.username.toLowerCase()}
                         name="username"
                         id="username"
                         onBlur={handleBlur}
