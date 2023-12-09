@@ -11,14 +11,10 @@ const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    //<React.StrictMode>
-
     <Provider store={store}>
         <QueryClientProvider client={queryClient}>
             <App className="flex flex-col min-h-screen"/>
             <ReactQueryDevtools initialIsOpen={false}/>
         </QueryClientProvider>
     </Provider>
-
-    //</React.StrictMode>
 );

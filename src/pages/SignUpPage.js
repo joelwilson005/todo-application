@@ -27,7 +27,7 @@ const SignUpPage = () => {
     // Redirect to the dashboard if the user is already signed in
     // Display loading animation while checking user status
     if (loading) {
-        return <LoadingBars></LoadingBars>;
+        return <LoadingBars/>;
     }
 
     // JSX for the SignUpPage component
@@ -52,7 +52,7 @@ const SignUpPage = () => {
             </main>
 
             {/* Footer component for the page */}
-            <Footer></Footer>
+            <Footer/>
         </>
     );
 };

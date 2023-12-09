@@ -21,7 +21,7 @@ const PasswordResetPage = () => {
     }
 
     if (loading) {
-        return <LoadingBars></LoadingBars>;
+        return <LoadingBars/>;
     }
     return (
         <>
@@ -37,7 +37,7 @@ const PasswordResetPage = () => {
                     className="hidden lg:block lg:place-self-center"
                 ></img>
             </main>
-            <Footer></Footer>
+            <Footer/>
         </>
     );
 };

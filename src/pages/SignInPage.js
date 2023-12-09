@@ -22,7 +22,7 @@ const SignInPage = () => {
 
 
     if (loading) {
-        return <LoadingBars></LoadingBars>;
+        return <LoadingBars/>;
     }
     return (
         <>
@@ -38,7 +38,7 @@ const SignInPage = () => {
                     className="hidden lg:block lg:place-self-center"
                 ></img>
             </main>
-            <Footer></Footer>
+            <Footer/>
         </>
     );
 };

@@ -32,13 +32,13 @@ const TodoListModal = ({todoListId}) => {
             setDescription(todoList.description);
             setId(todoList.id);
         }
-    }, [todoList.title, todoList.description]);
+    }, [todoList.title, todoList.description, todoList]);
 
     useEffect(() => {
         if (todoList) {
             setActionList(todoList.actionList || []);
         }
-    }, [todoList.actionList]);
+    }, [todoList, todoList.actionList]);
     const handleUpdateTodoList = (event) => {
         event.preventDefault();
 

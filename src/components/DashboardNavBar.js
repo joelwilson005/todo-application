@@ -90,6 +90,7 @@ const DashboardNavBar = () => {
                                     >
                                         Account Settings
                                     </a>
+                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                     <a
                                         href="#"
                                         className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"

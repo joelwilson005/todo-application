@@ -14,7 +14,7 @@ const NotFoundPage = () => {
     const loading = useLoadingState();
 
     if (loading) {
-        return <LoadingBars></LoadingBars>;
+        return <LoadingBars/>;
     }
 
     return (
@@ -55,7 +55,7 @@ const NotFoundPage = () => {
                 </main>
             </div>
 
-            <Footer></Footer>
+            <Footer/>
         </>
     );
 };
