@@ -82,22 +82,22 @@ const DashboardNavBar = () => {
                                     aria-orientation="vertical"
                                     aria-labelledby="options-menu"
                                 >
-                                    <button
-
+                                    <a
+                                        href="#settings"
                                         onClick={handleOpenUserSettings}
                                         className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
                                         role="menuitem"
                                     >
                                         Account Settings
-                                    </button>
+                                    </a>
                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                    <button
-                                        className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
-                                        role="menuitem"
-                                        onClick={handleSignOutUser}
+                                    <a href="#signout"
+                                       className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
+                                       role="menuitem"
+                                       onClick={handleSignOutUser}
                                     >
                                         Sign out
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         )}
