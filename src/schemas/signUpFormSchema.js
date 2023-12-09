@@ -12,7 +12,6 @@ const SignUpFormSchema = yup.object().shape({
         .string()
         .email("Please enter a valid email address")
         .required("*Required"),
-
     firstName: yup
         .string()
         .matches(nameRules, {
@@ -47,7 +46,8 @@ const SignUpFormSchema = yup.object().shape({
         .string()
         .matches(
             userNameRules,
-            "Username should consist of 3 to 16 characters and can include lowercase letters (a-z), digits (0-9), underscores (_), and hyphens (-)."
+            "\n" +
+            "Your username should be between 8 and 25 characters in length and must start with a letter. It can consist of letters, digits (0-9), and underscores (_), but it cannot start with a digit or underscore."
         )
         .required("*Required"),
 
