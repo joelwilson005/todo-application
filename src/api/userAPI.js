@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {ROOT_URL_DEV, USER_URL} from "../constants/url";
+import {ROOT_URL, USER_URL} from "../constants/url";
 
 const jwt = localStorage.getItem("jwt");
 const userId = localStorage.getItem("userId");
@@ -41,7 +41,7 @@ export const checkUsernameAndEmailAvailability = async (payload) => {
 };
 
 export const requestResetPasswordToken = async (payload) => {
-    return await axios.post(`${ROOT_URL_DEV}/forgot`, payload, contentTypeHeader);
+    return await axios.post(`${ROOT_URL}/forgot`, payload, contentTypeHeader);
 };
 
 export const updatePasswordWithToken = async (payload) => {
@@ -49,7 +49,7 @@ export const updatePasswordWithToken = async (payload) => {
     delete payload.confirmPassword;
 
     return await axios.post(
-        `${ROOT_URL_DEV}/reset_password`,
+        `${ROOT_URL}/reset_password`,
         payload,
         contentTypeHeader
     );

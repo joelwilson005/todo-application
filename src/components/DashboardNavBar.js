@@ -31,19 +31,19 @@ const DashboardNavBar = () => {
         };
     }, []);
 
-    const handleClick = (event) => {
+    const handleClick = () => {
         setOpen(true);
     };
 
-    const handleOpenUserSettings = (event) => {
+    const handleOpenUserSettings = () => {
         setOpenUserSettings(true);
     };
 
-    const handleUserClick = (event) => {
+    const handleUserClick = () => {
         setDropdownOpen(!dropdownOpen);
     };
 
-    const handleSignOutUser = (event) => {
+    const handleSignOutUser = () => {
         localStorage.setItem("isUserSignedIn", "false");
         navigate("/");
         localStorage.clear();
@@ -83,7 +83,7 @@ const DashboardNavBar = () => {
                                     aria-labelledby="options-menu"
                                 >
                                     <a
-                                        href="#"
+                                        href="#settings"
                                         onClick={handleOpenUserSettings}
                                         className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
                                         role="menuitem"
@@ -91,11 +91,10 @@ const DashboardNavBar = () => {
                                         Account Settings
                                     </a>
                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                    <a
-                                        href="#"
-                                        className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
-                                        role="menuitem"
-                                        onClick={handleSignOutUser}
+                                    <a href="#signout"
+                                       className="block px-4 py-2 text-sm text-neutralBackground hover:bg-secondary"
+                                       role="menuitem"
+                                       onClick={handleSignOutUser}
                                     >
                                         Sign out
                                     </a>

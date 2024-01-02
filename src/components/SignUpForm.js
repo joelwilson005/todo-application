@@ -32,6 +32,10 @@ const SignUpForm = () => {
 
     // Function to send form data to REST endpoint
     const sendFormData = async (payload) => {
+
+        // Ensure that username is lowercase
+        payload.username = payload.username.toLowerCase();
+        
         // Extract username and email from payload for availability check
         const usernameAndEmail = {
             username: payload.username,
@@ -163,7 +167,7 @@ const SignUpForm = () => {
                         }}
                         type="text"
                         placeholder="Username"
-                        value={values.username}
+                        value={values.username.toLowerCase()}
                         name="username"
                         id="username"
                         onBlur={handleBlur}
